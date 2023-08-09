@@ -9,11 +9,16 @@
 <body>
 	<h1> List Artikel Dalam Blog </h1>
 
-	<!-- <?php print_r($blogs) ?> -->
-	<?php foreach ($blogs as $index => $blog) : ?>
+	<?php foreach ($blogs as $index => $blog): ?>
 
-		<h2><?php echo $blog['tittle'] ?></h2>
-		<p><?php echo $blog['content'] ?></p>
+		<h2>
+			<a href="<?php echo site_url('blog/detail/'.$blog['url']); ?>">
+				<?php echo $blog['title'] ?>
+			</a>
+		</h2>
+		<p>
+			<?php echo $blog['content'] ?>
+		</p>
 
 	<?php endforeach ?>
 
