@@ -14,9 +14,10 @@ class Blog extends CI_Controller
 
     public function index()
     {
-        $query = $this->Blog_model->getBlogs();
-        ;
-        $data['blogs'] = $query->result_array();
+        // $query = $this->Blog_model->getBlogs();
+        
+        // $data['blogs'] = $query->result_array();
+        $data = $this->Blog_model->getBlogs();
 
         $this->load->view('blog', $data);
     }
@@ -41,14 +42,15 @@ class Blog extends CI_Controller
 
             $id = $this->Blog_model->addArtikel($data);
 
-            if ($id) {
-                echo "Data Berhasil Disimpan";
-            } else {
-                echo "Data Gagal Disimpan";
-            }
+            // if ($id) {
+            //     echo "Data Berhasil Disimpan";
+            // } else {
+            //     echo "Data Gagal Disimpan";
+            // }
+            redirect('/');
+        }else{
+            $this->load->view('form_add');
         }
-
-        $this->load->view('form_add');
     }
 
     public function edit($id)
@@ -63,14 +65,20 @@ class Blog extends CI_Controller
             // print_r($value);
 
             $id = $this->Blog_model->editArtikel($id, $value);
-
-            if ($id) {
-                echo "Data Berhasil Disimpan";
-            } else {
-                echo "Data Gagal Disimpan";
-            }
+            // if ($id) {
+            //     echo "Data Berhasil Disimpan";
+            // } else {
+            //     echo "Data Gagal Disimpan";
+            // }
+            redirect('/');
+        }else{
+            $this->load->view('form_edit', $data);
         }
+    }
 
-        $this->load->view('form_edit', $data);
+    public function delete($id)
+    {
+        $this->Blog_model->deleteArtikel($id);
+        redirect('/');
     }
 }
